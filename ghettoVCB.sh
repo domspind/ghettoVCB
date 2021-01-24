@@ -334,11 +334,13 @@ sanityCheck() {
     [[ ! -f /bin/tar ]] && TAR="busybox tar"
 
     # Enable multiextent VMkernel module if disk format is 2gbsparse (disabled by default in 5.1)
-    if [[ "${DISK_BACKUP_FORMAT}" == "2gbsparse" ]] && [[ "${VER}" -eq 5 || "${VER}" == "6" || "${VER}" == "7" ]]; then
-        esxcli system module list | grep multiextent > /dev/null 2>&1
-	if [ $? -eq 1 ]; then
-            logger "info" "multiextent VMkernel module is not loaded & is required for 2gbsparse, enabling ..."
-            esxcli system module load -m multiextent
+    if [[ "${DISK_BACKUP_FORMAT}" == "2gbsparse" ]]; then
+        if [[ "${VER}" -eq 5 || "${VER}" == "6" || "${VER}" == "7" ]]; then
+            esxcli system module list | grep multiextent > /dev/null 2>&1
+            if [ $? -eq 1 ]; then
+                logger "info" "multiextent VMkernel module is not loaded & is required for 2gbsparse, enabling ..."
+                esxcli system module load -m multiextent
+            fi
         fi
     fi
 }
