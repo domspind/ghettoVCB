@@ -3,7 +3,7 @@
 # www.virtuallyghetto.com
 # Script to build ghettoVCB VIB using VIB Author (can use with lamw/vibauthor Docker Container)
 
-GVCB_REPO=https://github.com/lamw/ghettoVCB.git
+GVCB_REPO=https://github.com/domspind/ghettoVCB.git
 GVCB_REPO_DIR=ghettoVCB
 GVCB_TEMP_DIR=/tmp/ghettoVCB-$$
 
